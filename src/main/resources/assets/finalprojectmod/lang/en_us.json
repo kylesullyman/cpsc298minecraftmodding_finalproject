@@ -1,0 +1,18 @@
+{
+  "itemGroup.finalprojectmod": "Example Mod Tab",
+  "block.finalprojectmod.spongebob_block": "Spongebob Block",
+  "block.finalprojectmod.corgi_dispenser_block": "Corgi Dispenser Block",
+  "item.finalprojectmod.transmutation_wand": "Transmutation Wand",
+  "item.finalprojectmod.plankton": "Plankton",
+  "item.finalprojectmod.secret_formula": "Secret Formula",
+  "item.finalprojectmod.spatula": "Spatula",
+  "item.finalprojectmod.krabby_patty": "Krabby Patty",
+  "item.finalprojectmod.corgi_spawn_egg": "Corgi Spawn Egg",
+  "finalprojectmod.configuration.title": "Final Project Mod Configs",
+  "finalprojectmod.configuration.section.finalprojectmod.common.toml": "Final Project Mod Configs",
+  "finalprojectmod.configuration.section.finalprojectmod.common.toml.title": "Final Project Mod Configs",
+  "finalprojectmod.configuration.items": "Item List",
+  "finalprojectmod.configuration.logDirtBlock": "Log Dirt Block",
+  "finalprojectmod.configuration.magicNumberIntroduction": "Magic Number Text",
+  "finalprojectmod.configuration.magicNumber": "Magic Number"
+}
