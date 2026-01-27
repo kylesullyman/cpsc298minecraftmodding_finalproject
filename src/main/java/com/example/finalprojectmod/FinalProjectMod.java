@@ -143,24 +143,13 @@ public class FinalProjectMod {
                     new Item(new Item.Properties()
                             .setId(ResourceKey.create(Registries.ITEM, registryName))
                             .food(new FoodProperties.Builder()
-                                    .nutrition(20)                 // full hunger bar
-                                    .saturationModifier(1.0f)      // very filling
-                                    .alwaysEdible()                // eat even at full hunger
-                                    .effect(
-                                            () -> new MobEffectInstance(
-                                                    MobEffects.REGENERATION,
-                                                    100,   // duration in ticks (5 seconds)
-                                                    0      // amplifier (0 = Regeneration I)
-                                            ),
-                                            1.0f      // 100% chance
-                                    )
+                                    .nutrition(20)            // full hunger bar
+                                    .saturationModifier(1.0f) // makes it very filling
+                                    .alwaysEdible()           // can eat even at full hunger
                                     .build()
                             )
                     )
             );
-
-
-
 
     public static final DeferredItem<Item> CORGI_SPAWN_EGG =
             ITEMS.register("corgi_spawn_egg", (registryName) ->
