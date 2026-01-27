@@ -35,7 +35,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
-// teste comment omre test
+// teste comment omre test more test
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(FinalProjectMod.MODID)
 public class FinalProjectMod {
