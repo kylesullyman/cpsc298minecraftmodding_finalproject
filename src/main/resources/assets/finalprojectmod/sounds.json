@@ -4,5 +4,11 @@
     "sounds": [
       { "name": "finalprojectmod:corgi_bark", "volume": 1.0, "pitch": 1.0 }
     ]
+  },
+  "spongebob_laugh": {
+    "category": "neutral",
+    "sounds": [
+      { "name": "finalprojectmod:spongebob_laugh", "volume": 1.0, "pitch": 1.0 }
+    ]
   }
 }

@@ -135,11 +135,16 @@ public class FinalProjectMod {
             DeferredRegister.create(Registries.SOUND_EVENT, "finalprojectmod");
 
     // ADD SOUNDS HERE
-    public static final DeferredHolder<SoundEvent, SoundEvent> CORGI_BARK =
-            SOUNDS.register("corgi_bark", () ->
+//    public static final DeferredHolder<SoundEvent, SoundEvent> CORGI_BARK =
+//            SOUNDS.register("corgi_bark", () ->
+//                    SoundEvent.createVariableRangeEvent(
+//                            ResourceLocation.fromNamespaceAndPath("finalprojectmod",
+//                                    "corgi_bark")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> SPONGEBOB_LAUGH =
+            SOUNDS.register("spongebob_laugh", () ->
                     SoundEvent.createVariableRangeEvent(
                             ResourceLocation.fromNamespaceAndPath("finalprojectmod",
-                                    "corgi_bark")));
+                                    "spongebob_laugh")));
 
     // Creates a creative tab with the id "finalprojectmod:example_tab" for the example item, that is placed after the combat tab
     // ADD TO CREATIVE TAB HERE
@@ -185,7 +190,7 @@ public class FinalProjectMod {
         NeoForge.EVENT_BUS.register(this);
 
         // Register the item to a creative tab
-        modEventBus.addListener(this::addCreative);
+        // modEventBus.addListener(this::addCreative);
 
         // Client-only: register renderers
 //        if (FMLEnvironment.dist == Dist.CLIENT) {
@@ -211,11 +216,11 @@ public class FinalProjectMod {
     }
 
     // Add the example block item to the building blocks tab
-    private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
-            // event.accept(CORGI_DISPENSER_BLOCK_ITEM);
-        }
-    }
+//    private void addCreative(BuildCreativeModeTabContentsEvent event) {
+//        if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
+//            // event.accept(CORGI_DISPENSER_BLOCK_ITEM);
+//        }
+//    }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
