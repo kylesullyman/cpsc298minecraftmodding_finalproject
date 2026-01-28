@@ -55,8 +55,28 @@ public class PlayerInteractions {
         ItemStack item = player.getItemInHand(hand);
         BlockPos pos = event.getPos();
 
-        if (!world.isClientSide) {
-            // DO STUFF HERE
+//        if (!world.isClientSide) {
+//            // DO STUFF HERE
+//            if(hand == InteractionHand.MAIN_HAND && world.getBlockState(pos).is(FinalProjectMod.SPONGEBOB_BLOCK.get())){
+//                // play the sound
+//                //world.playSound(player, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, FinalProjectMod.SPONGEBOB_LAUGH.value(), SoundSource.NEUTRAL, 1.0F, 1.0F);
+//                player.playSound(FinalProjectMod.SPONGEBOB_LAUGH.value(), 1, 1);
+//            }
+//        }
+//        event.setCanceled(true);
+        // Check if empty hand and right-clicked CORGI_DISPENSER_BLOCK
+        if (hand == InteractionHand.MAIN_HAND && item.isEmpty() &&
+                world.getBlockState(pos).is(FinalProjectMod.SPONGEBOB_BLOCK.get())) {
+
+            if (!world.isClientSide) {
+
+                // Play the sound
+//                world.playSound(null, pos,
+//                        FinalProjectMod.SPONGEBOB_LAUGH.value(),
+//                        SoundSource.NEUTRAL, 1.0F, 1.0F);
+                // player.playSound(FinalProjectMod.SPONGEBOB_LAUGH.get(), 1, 1);
+            }
+            event.setCanceled(true);
         }
     }
 }
