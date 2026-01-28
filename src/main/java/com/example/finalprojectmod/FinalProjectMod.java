@@ -151,7 +151,7 @@ public class FinalProjectMod {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.finalprojectmod")) //The language key for the title of your CreativeModeTab
             .withTabsBefore(CreativeModeTabs.COMBAT)
-            // .icon(() -> CORGI_DISPENSER_BLOCK_ITEM.get().getDefaultInstance())
+            .icon(() -> SPONGEBOB_BLOCK_ITEM.get().getDefaultInstance()) // icon for the creative tab
             .displayItems((parameters, output) -> {
                 output.accept(SPONGEBOB_BLOCK_ITEM.get());
                 output.accept(PLANKTON.get());
