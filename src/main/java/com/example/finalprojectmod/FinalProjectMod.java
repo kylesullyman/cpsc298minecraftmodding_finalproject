@@ -64,15 +64,6 @@ public class FinalProjectMod {
             ItemTags.PLANKS // Repairable with wood planks (for fun)
     );
 
-    // ADD BLOCKS HERE
-    public static final DeferredBlock<Block> CORGI_DISPENSER_BLOCK = BLOCKS.registerSimpleBlock("corgi_dispenser_block",
-            BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.STONE)
-                    .strength(1.0f, 6.0f) // Hardness, Resistance
-                    .lightLevel(state -> 10) // Emits light level 10
-                    .sound(net.minecraft.world.level.block.SoundType.STONE) // Stone sound when stepped on or broken
-    );
-
    /* public static final DeferredBlock<Block> SPONGEBOB_BLOCK = BLOCKS.registerSimpleBlock("spongebob_block",
             BlockBehaviour.Properties.of()
                     .mapColor(MapColor.GOLD)
@@ -97,12 +88,8 @@ public class FinalProjectMod {
             );
 
 
-    // ADD BLOCK ITEMS HERE
-    public static final DeferredItem<BlockItem> CORGI_DISPENSER_BLOCK_ITEM =
-            ITEMS.registerSimpleBlockItem("corgi_dispenser_block",
-                    CORGI_DISPENSER_BLOCK);
 
-
+    // ADD BLOCKITEMS HERE
     public static final DeferredItem<BlockItem> SPONGEBOB_BLOCK_ITEM =
             ITEMS.registerSimpleBlockItem("spongebob_block",
                     SPONGEBOB_BLOCK);
@@ -110,13 +97,6 @@ public class FinalProjectMod {
 
 
     // ADD ITEMS HERE
-    public static final DeferredItem<Item> TRANSMUTATION_WAND =
-            ITEMS.register("transmutation_wand", registryName ->
-                    new Item(new Item.Properties()
-                            .setId(ResourceKey.create(Registries.ITEM, registryName))
-                    )
-            );
-
     public static final DeferredItem<Item> SECRET_FORMULA =
             ITEMS.register("secret_formula", registryName ->
                     new Item(new Item.Properties()
@@ -151,15 +131,6 @@ public class FinalProjectMod {
                     )
             );
 
-    public static final DeferredItem<Item> CORGI_SPAWN_EGG =
-            ITEMS.register("corgi_spawn_egg", (registryName) ->
-                    new net.minecraft.world.item.SpawnEggItem(
-                            ModEntities.CORGI.get(),
-                            new Item.Properties().setId(
-                                    net.minecraft.resources.ResourceKey.create(
-                                            net.minecraft.core.registries.Registries.ITEM, registryName)))
-            );
-
     public static final DeferredRegister<SoundEvent> SOUNDS =
             DeferredRegister.create(Registries.SOUND_EVENT, "finalprojectmod");
 
@@ -175,12 +146,9 @@ public class FinalProjectMod {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.finalprojectmod")) //The language key for the title of your CreativeModeTab
             .withTabsBefore(CreativeModeTabs.COMBAT)
-            .icon(() -> CORGI_DISPENSER_BLOCK_ITEM.get().getDefaultInstance())
+            // .icon(() -> CORGI_DISPENSER_BLOCK_ITEM.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
-                output.accept(CORGI_DISPENSER_BLOCK_ITEM.get());
                 output.accept(SPONGEBOB_BLOCK_ITEM.get());
-                output.accept(TRANSMUTATION_WAND.get());
-                output.accept(CORGI_SPAWN_EGG.get());
                 output.accept(PLANKTON.get());
                 output.accept(SPATULA.get());
                 output.accept(KRABBY_PATTY.get());
@@ -209,7 +177,7 @@ public class FinalProjectMod {
         SOUNDS.register(modEventBus);
 
         // Register our custom entities
-        ModEntities.register(modEventBus);
+        // ModEntities.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (FinalProjectMod) to respond directly to events.
@@ -220,10 +188,10 @@ public class FinalProjectMod {
         modEventBus.addListener(this::addCreative);
 
         // Client-only: register renderers
-        if (FMLEnvironment.dist == Dist.CLIENT) {
-            modEventBus.addListener((EntityRenderersEvent.RegisterRenderers e) ->
-                    FinalProjectModClient.onRegisterRenderers(e));
-        }
+//        if (FMLEnvironment.dist == Dist.CLIENT) {
+//            modEventBus.addListener((EntityRenderersEvent.RegisterRenderers e) ->
+//                    FinalProjectModClient.onRegisterRenderers(e));
+//        }
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
@@ -245,7 +213,7 @@ public class FinalProjectMod {
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
-            event.accept(CORGI_DISPENSER_BLOCK_ITEM);
+            // event.accept(CORGI_DISPENSER_BLOCK_ITEM);
         }
     }
 
