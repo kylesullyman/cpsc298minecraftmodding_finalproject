@@ -177,7 +177,7 @@ public class FinalProjectMod {
         SOUNDS.register(modEventBus);
 
         // Register our custom entities
-        ModEntities.register(modEventBus);
+        // ModEntities.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (FinalProjectMod) to respond directly to events.
@@ -188,10 +188,10 @@ public class FinalProjectMod {
         modEventBus.addListener(this::addCreative);
 
         // Client-only: register renderers
-        if (FMLEnvironment.dist == Dist.CLIENT) {
-            modEventBus.addListener((EntityRenderersEvent.RegisterRenderers e) ->
-                    FinalProjectModClient.onRegisterRenderers(e));
-        }
+//        if (FMLEnvironment.dist == Dist.CLIENT) {
+//            modEventBus.addListener((EntityRenderersEvent.RegisterRenderers e) ->
+//                    FinalProjectModClient.onRegisterRenderers(e));
+//        }
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);

@@ -23,9 +23,9 @@ public class FinalProjectModClient {
         container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
     }
 
-    static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(ModEntities.CORGI.get(), CorgiRenderer::new);
-    }
+//    static i  void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
+//        event.registerEntityRenderer(ModEntities.CORGI.get(), CorgiRenderer::new);
+//    }
 
     @SubscribeEvent
     static void onClientSetup(FMLClientSetupEvent event) {
