@@ -14,5 +14,6 @@
   "finalprojectmod.configuration.items": "Item List",
   "finalprojectmod.configuration.logDirtBlock": "Log Dirt Block",
   "finalprojectmod.configuration.magicNumberIntroduction": "Magic Number Text",
-  "finalprojectmod.configuration.magicNumber": "Magic Number"
+  "finalprojectmod.configuration.magicNumber": "Magic Number",
+  "item.finalprojectmod.mega_spatula": "Mega Spatula"
 }

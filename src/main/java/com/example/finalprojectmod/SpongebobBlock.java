@@ -30,10 +30,12 @@ public class SpongebobBlock extends Block {
                         player.getOffhandItem().is(Items.FISHING_ROD);
 
         if (usingFishingRod) {
-            // permanent removal: drop the block item once
-            popResource(serverLevel, pos, new ItemStack(this.asItem()));
+            popResource(serverLevel, pos, new ItemStack(this.asItem())); // SpongeBob block item
+            popResource(serverLevel, pos, new ItemStack(Items.SPONGE, 3)); // sponges
+            popResource(serverLevel, pos, new ItemStack(FinalProjectMod.SPATULA.get())); // spatula
             return result;
         }
+
 
         // otherwise: respawn within 5 blocks of the player, no drop
         BlockPos respawnPos = findRespawnPosNearPlayer(serverLevel, player.blockPosition(), 5);

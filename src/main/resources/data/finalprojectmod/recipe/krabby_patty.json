@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " S ",
+    "FH ",
+    " S "
+  ],
+  "key": {
+    "S": "minecraft:bread",
+    "H": "minecraft:cooked_beef",
+    "F": "finalprojectmod:secret_formula"
+  },
+  "result": {
+    "id": "finalprojectmod:krabby_patty",
+    "count": 1
+  },
+  "show_notification": true
+}
