@@ -64,15 +64,14 @@ public class FinalProjectMod {
             ItemTags.PLANKS // Repairable with wood planks (for fun)
     );
 
-    );
-            ItemTags.IRON_TOOL_MATERIALS
-            22,        // enchantability
+    public static final ToolMaterial MEGA_SPATULA_MATERIAL = new ToolMaterial(
+            BlockTags.INCORRECT_FOR_NETHERITE_TOOL, // least restrictive
+            2500,      // durability
             12.0F,     // speed
             1.0F,      // attack bonus
-            BlockTags.INCORRECT_FOR_NETHERITE_TOOL, // least restrictive
-    public static final ToolMaterial MEGA_SPATULA_MATERIAL = new ToolMaterial(
-            2500,      // durability
-
+            22,        // enchantability
+            ItemTags.IRON_TOOL_MATERIALS
+    );
    /* public static final DeferredBlock<Block> SPONGEBOB_BLOCK = BLOCKS.registerSimpleBlock("spongebob_block",
             BlockBehaviour.Properties.of()
                     .mapColor(MapColor.GOLD)

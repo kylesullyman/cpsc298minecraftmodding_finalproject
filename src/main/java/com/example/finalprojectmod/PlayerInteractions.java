@@ -1,6 +1,7 @@
 package com.example.finalprojectmod;
 
 
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.entity.player.Player;
@@ -53,7 +54,32 @@ public class PlayerInteractions {
         ItemStack item = player.getItemInHand(hand);
         BlockPos pos = event.getPos();
 
-        // --- Spatula / Mega Spatula -> Krabby Patty ---
+        //        if (!world.isClientSide) {
+//            // DO STUFF HERE
+//            if(hand == InteractionHand.MAIN_HAND && world.getBlockState(pos).is(FinalProjectMod.SPONGEBOB_BLOCK.get())){
+//                // play the sound
+//                //world.playSound(player, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, FinalProjectMod.SPONGEBOB_LAUGH.value(), SoundSource.NEUTRAL, 1.0F, 1.0F);
+//                player.playSound(FinalProjectMod.SPONGEBOB_LAUGH.value(), 1, 1);
+//            }
+//        }
+//        event.setCanceled(true);
+        // Check if empty hand and right-clicked CORGI_DISPENSER_BLOCK
+        if (hand == InteractionHand.MAIN_HAND && item.isEmpty() &&
+                world.getBlockState(pos).is(FinalProjectMod.SPONGEBOB_BLOCK.get())) {
+
+            if (!world.isClientSide) {
+
+                // Play the sound
+                world.playSound(null, pos,
+                        FinalProjectMod.SPONGEBOB_LAUGH.value(),
+                        SoundSource.NEUTRAL, 1.0F, 1.0F);
+                // player.playSound(FinalProjectMod.SPONGEBOB_LAUGH.get(), 1, 1);
+            }
+            event.setCanceled(true);
+        }
+
+
+            // --- Spatula / Mega Spatula -> Krabby Patty ---
 
         if (item.is(FinalProjectMod.SPATULA.get()) || item.is(FinalProjectMod.MEGA_SPATULA.get())) {
             Block.popResource(world, pos.above(), new ItemStack(FinalProjectMod.KRABBY_PATTY.get()));
@@ -75,7 +101,6 @@ public class PlayerInteractions {
 
             event.setCanceled(true);
             event.setCancellationResult(InteractionResult.SUCCESS);
-            return;
         }
     }
 
