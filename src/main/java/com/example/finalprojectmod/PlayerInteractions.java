@@ -1,33 +1,32 @@
 package com.example.finalprojectmod;
 
+
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.Cow;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
+
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
-import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 public class PlayerInteractions {
 
     @SubscribeEvent
     public static void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
-        Player player = event.getEntity();                     // The player
-        ItemStack item = event.getItemStack();                 // The item used
-        Level world = event.getLevel();                        // The world (level)
-        InteractionHand hand = event.getHand();                // Main or off-hand
+        Player player = event.getEntity();
+        ItemStack item = event.getItemStack();
+        Level world = event.getLevel();
+        InteractionHand hand = event.getHand();
 
         if (!world.isClientSide) {
             // DO STUFF HERE
@@ -36,14 +35,13 @@ public class PlayerInteractions {
 
     @SubscribeEvent
     public static void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
-        Player player = event.getEntity();                     // The player
-        ItemStack item = event.getItemStack();                 // The item used
-        Level world = event.getLevel();                        // The world
-        InteractionHand hand = event.getHand();                // Hand used
-        Entity target = event.getTarget();                     // Entity being interacted with
+        Player player = event.getEntity();
+        ItemStack item = event.getItemStack();
+        Level world = event.getLevel();
+        InteractionHand hand = event.getHand();
 
         if (!world.isClientSide) {
-            // DO STUFF HERE
+            // DO STUFF HERE (this is for mobs/entities, not blocks)
         }
     }
 
@@ -55,28 +53,83 @@ public class PlayerInteractions {
         ItemStack item = player.getItemInHand(hand);
         BlockPos pos = event.getPos();
 
-//        if (!world.isClientSide) {
-//            // DO STUFF HERE
-//            if(hand == InteractionHand.MAIN_HAND && world.getBlockState(pos).is(FinalProjectMod.SPONGEBOB_BLOCK.get())){
-//                // play the sound
-//                //world.playSound(player, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, FinalProjectMod.SPONGEBOB_LAUGH.value(), SoundSource.NEUTRAL, 1.0F, 1.0F);
-//                player.playSound(FinalProjectMod.SPONGEBOB_LAUGH.value(), 1, 1);
-//            }
-//        }
-//        event.setCanceled(true);
-        // Check if empty hand and right-clicked CORGI_DISPENSER_BLOCK
-        if (hand == InteractionHand.MAIN_HAND && item.isEmpty() &&
-                world.getBlockState(pos).is(FinalProjectMod.SPONGEBOB_BLOCK.get())) {
+        // --- Spatula / Mega Spatula -> Krabby Patty ---
 
-            if (!world.isClientSide) {
+        if (item.is(FinalProjectMod.SPATULA.get()) || item.is(FinalProjectMod.MEGA_SPATULA.get())) {
+            Block.popResource(world, pos.above(), new ItemStack(FinalProjectMod.KRABBY_PATTY.get()));
 
-                // Play the sound
-                world.playSound(null, pos,
-                        FinalProjectMod.SPONGEBOB_LAUGH.value(),
-                        SoundSource.NEUTRAL, 1.0F, 1.0F);
-                // player.playSound(FinalProjectMod.SPONGEBOB_LAUGH.get(), 1, 1);
-            }
             event.setCanceled(true);
+            event.setCancellationResult(InteractionResult.SUCCESS);
+            return;
+        }
+
+        // --- Plankton -> Secret Formula ---
+        if (item.is(FinalProjectMod.PLANKTON.get())) {
+
+            // Consume 1 plankton (unless creative)
+            if (!player.getAbilities().instabuild) {
+                item.shrink(1);
+            }
+
+            Block.popResource(world, pos.above(), new ItemStack(FinalProjectMod.SECRET_FORMULA.get()));
+
+            event.setCanceled(true);
+            event.setCancellationResult(InteractionResult.SUCCESS);
+            return;
         }
     }
+
+    @SubscribeEvent
+    public static void onLivingIncomingDamage(LivingIncomingDamageEvent event) {
+        if (event.getEntity().level().isClientSide) return;
+
+        LivingEntity victim = event.getEntity();
+
+        // Only cows
+        if (!(victim instanceof Cow)) return;
+
+        // Only player attacks
+        if (!(event.getSource().getEntity() instanceof Player player)) return;
+
+        // Only Mega Spatula
+        if (!player.getMainHandItem().is(FinalProjectMod.MEGA_SPATULA.get())) return;
+
+        // Mark cow so drops event knows
+        victim.getPersistentData().putBoolean("killed_by_mega_spatula", true);
+
+        // Instantly kill
+        event.setAmount(99999.0F);
+    }
+
+    @SubscribeEvent
+    public static void onLivingDrops(LivingDropsEvent event) {
+        if (event.getEntity().level().isClientSide) return;
+
+        if (!(event.getEntity() instanceof Cow cow)) return;
+
+        if (!(event.getSource().getEntity() instanceof Player player)) return;
+
+        if (!player.getMainHandItem().is(FinalProjectMod.MEGA_SPATULA.get())) return;
+
+        // Safety check
+        if (!cow.getPersistentData().getBoolean("killed_by_mega_spatula").orElse(false)) return;
+
+
+        // Remove normal drops
+        event.getDrops().clear();
+
+        // Drop Krabby Patties
+        ItemStack patties = new ItemStack(FinalProjectMod.KRABBY_PATTY.get(), 2);
+
+        ItemEntity drop = new ItemEntity(
+                cow.level(),
+                cow.getX(), cow.getY(), cow.getZ(),
+                patties
+        );
+
+        event.getDrops().add(drop);
+    }
+
+
+
 }

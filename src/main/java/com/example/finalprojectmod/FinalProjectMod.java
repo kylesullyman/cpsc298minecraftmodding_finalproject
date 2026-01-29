@@ -64,6 +64,15 @@ public class FinalProjectMod {
             ItemTags.PLANKS // Repairable with wood planks (for fun)
     );
 
+    );
+            ItemTags.IRON_TOOL_MATERIALS
+            22,        // enchantability
+            12.0F,     // speed
+            1.0F,      // attack bonus
+            BlockTags.INCORRECT_FOR_NETHERITE_TOOL, // least restrictive
+    public static final ToolMaterial MEGA_SPATULA_MATERIAL = new ToolMaterial(
+            2500,      // durability
+
    /* public static final DeferredBlock<Block> SPONGEBOB_BLOCK = BLOCKS.registerSimpleBlock("spongebob_block",
             BlockBehaviour.Properties.of()
                     .mapColor(MapColor.GOLD)
@@ -131,6 +140,19 @@ public class FinalProjectMod {
                     )
             );
 
+    public static final DeferredItem<Item> MEGA_SPATULA =
+            ITEMS.register("mega_spatula", registryName ->
+                    new Item(new Item.Properties()
+                            .setId(ResourceKey.create(Registries.ITEM, registryName))
+                            .durability(2500)
+                            .sword(
+                                    MEGA_SPATULA_MATERIAL,
+                                    2.0F,  // extra attack damage
+                                    1.8F   // attack speed
+                            )
+                    )
+            );
+
     public static final DeferredRegister<SoundEvent> SOUNDS =
             DeferredRegister.create(Registries.SOUND_EVENT, "finalprojectmod");
 
@@ -158,6 +180,7 @@ public class FinalProjectMod {
                 output.accept(SPATULA.get());
                 output.accept(KRABBY_PATTY.get());
                 output.accept(SECRET_FORMULA.get());
+                output.accept(MEGA_SPATULA.get());
             }).build());
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
