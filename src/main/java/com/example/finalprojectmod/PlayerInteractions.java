@@ -71,9 +71,9 @@ public class PlayerInteractions {
             if (!world.isClientSide) {
 
                 // Play the sound
-//                world.playSound(null, pos,
-//                        FinalProjectMod.SPONGEBOB_LAUGH.value(),
-//                        SoundSource.NEUTRAL, 1.0F, 1.0F);
+                world.playSound(null, pos,
+                        FinalProjectMod.SPONGEBOB_LAUGH.value(),
+                        SoundSource.NEUTRAL, 1.0F, 1.0F);
                 // player.playSound(FinalProjectMod.SPONGEBOB_LAUGH.get(), 1, 1);
             }
             event.setCanceled(true);
