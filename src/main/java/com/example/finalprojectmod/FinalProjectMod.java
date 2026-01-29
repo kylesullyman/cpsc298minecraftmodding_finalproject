@@ -91,7 +91,6 @@ public class FinalProjectMod {
                                     .strength(0.6f, 1200.0f)
                                     .lightLevel(state -> 6)
                                     .sound(net.minecraft.world.level.block.SoundType.SPONGE)
-                                    .noLootTable()
                     )
             );
 

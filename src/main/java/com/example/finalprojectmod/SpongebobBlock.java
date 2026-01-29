@@ -5,8 +5,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -25,19 +23,6 @@ public class SpongebobBlock extends Block {
         if (level.isClientSide) return result;
         ServerLevel serverLevel = (ServerLevel) level;
 
-        boolean usingFishingRod =
-                player.getMainHandItem().is(Items.FISHING_ROD) ||
-                        player.getOffhandItem().is(Items.FISHING_ROD);
-
-        if (usingFishingRod) {
-            popResource(serverLevel, pos, new ItemStack(this.asItem())); // SpongeBob block item
-            popResource(serverLevel, pos, new ItemStack(Items.SPONGE, 3)); // sponges
-            popResource(serverLevel, pos, new ItemStack(FinalProjectMod.SPATULA.get())); // spatula
-            return result;
-        }
-
-
-        // otherwise: respawn within 5 blocks of the player, no drop
         BlockPos respawnPos = findRespawnPosNearPlayer(serverLevel, player.blockPosition(), 5);
 
         if (respawnPos != null) {
